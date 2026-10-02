@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#11130f">
+  <title>Highway Rush</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="api-config.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="game-shell">
+    <header class="hud">
+      <button id="menuToggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="gameMenu"><span></span><span></span><span></span></button>
+      <a class="logo" href="#game" aria-label="Highway Rush home"><span>ROAD</span>RUSH<span class="logo-mark">!</span></a>
+      <div class="score-box"><span class="hud-label">DISTANCE</span><strong id="score">000000</strong></div>
+      <div class="best-box"><span class="hud-label">BEST</span><strong id="bestScore">000000</strong></div>
+      <div class="cash-box"><span class="hud-label">CASH</span><strong id="cash">$0</strong></div>
+      <div class="speed-box"><span class="hud-label">SPEED</span><strong><span id="speed">0</span><small> MPH</small></strong></div>
+    </header>
+    <nav class="game-menu" id="gameMenu" hidden aria-label="Game menu">
+      <button id="payOpen" type="button"><span>PAY A PLAYER</span><b>→</b></button>
+      <button id="adminOpen" type="button" hidden><span>ADMIN PANEL</span><b>F2</b></button>
+    </nav>
+
+    <section class="screen" id="game" aria-label="Highway Rush game">
+      <canvas id="road" width="240" height="400" aria-label="Drive your motorcycle down the highway and dodge traffic"></canvas>
+      <div class="overlay" id="overlay">
+        <div class="overlay-content">
+          <div class="pixel-label"><span class="label-dot"></span> HIGH SCORE RUN</div>
+          <h1>HIGHWAY<br><span>RUSH</span></h1>
+          <p>DODGE TRAFFIC. CHASE THE HORIZON.</p>
+          <button id="play" type="button"><span>START ENGINE</span><b>▶</b></button>
+          <button id="shopOpen" class="shop-open" type="button">OPEN UPGRADE SHOP <b>$</b></button>
+          <button id="leaderboardOpen" class="leaderboard-open" type="button">VIEW LEADERBOARD <b>↗</b></button>
+          <div class="user-bar">
+            <span class="user-avatar" aria-hidden="true">R</span>
+            <span class="user-tag">RIDER</span>
+            <input id="usernameInput" type="text" maxlength="16" autocomplete="nickname" placeholder="ENTER NAME" aria-label="Username">
+            <button id="saveUsername" type="button">SAVE NAME</button>
+          </div>
+          <div class="controls-hint">↑ <span>GO</span><i></i> ← → <span>STEER</span><i></i> W / A / D</div>
+          <div class="data-note">RIDE TO EARN CASH. UNLOCK NEW PAINT.<br>GUEST CASH & BESTS STAY HERE.<br>SIGNED-IN BESTS LINK TO YOUR IP.</div>
+        </div>
+      </div>
+      <div class="crash-overlay" id="crash" aria-live="polite">
+        <p>WIPEOUT</p><span>DISTANCE <b id="finalScore">000000</b></span>
+        <span class="earned-cash" id="earnedCash">+$0 CASH</span>
+        <span id="saveStatus" class="save-status" aria-live="polite"></span>
+        <button id="retry" type="button">RIDE AGAIN <b>↻</b></button>
+        <button id="homeCrash" class="home-action" type="button">BACK TO HOME</button>
+      </div>
+      <button id="homeGame" class="home-game" type="button">BACK TO HOME</button>
+      <div class="touch-controls" aria-label="Steering controls">
+        <button class="steer" data-steer="-1" aria-label="Steer left">◀</button>
+        <button class="steer" data-steer="1" aria-label="Steer right">▶</button>
+        <button class="pedal accelerate" data-action="accelerate" aria-label="Accelerate">▲<small>GO</small></button>
+        <button class="pedal brake" data-action="brake" aria-label="Break">▼<small>BREAK</small></button>
+        <button class="ability-control" id="nitroControl" type="button" aria-label="Use nitro" hidden><span id="nitroCount">2</span><small>NITRO</small></button>
+        <button class="ability-control" id="jumpControl" type="button" aria-label="Jump over traffic" hidden>JUMP</button>
+      </div>
+      <div class="scanlines" aria-hidden="true"></div>
+    </section>
+
+    <footer class="footer"><span class="copyright">© PIXEL MOTOR CLUB</span></footer>
+  </main>
+  <section class="shop-panel" id="shopPanel" aria-label="Upgrade shop" aria-modal="true" role="dialog" hidden>
+    <div class="shop-card">
+      <header class="shop-header"><div><span class="shop-kicker">RIDE EARNINGS</span><h2>UPGRADE SHOP</h2></div><button id="shopClose" type="button" aria-label="Close upgrade shop">×</button></header>
+      <div class="shop-summary"><span>YOUR CASH</span><strong id="shopCash">$0</strong></div>
+      <div class="shop-items" id="shopItems"></div>
+      <p class="shop-footnote" id="shopStatus">EARN $2 FOR EVERY 100 DISTANCE.</p>
+      <p class="shop-footnote">NITRO: SHIFT / BUTTON · JUMP: SPACE / BUTTON</p>
+    </div>
+  </section>
+  <section class="pay-panel" id="payPanel" aria-label="Pay a player" aria-modal="true" role="dialog" hidden>
+    <div class="pay-card">
+      <header class="pay-header"><div><span class="pay-kicker">RIDER TRANSFER</span><h2>PAY A PLAYER</h2></div><button id="payClose" type="button" aria-label="Close payment">×</button></header>
+      <div class="pay-balance"><span>YOUR CASH</span><strong id="payBalance">$0</strong></div>
+      <div class="pay-fields">
+        <label><span>PLAYER</span><select id="payPlayer"><option value="">SELECT PLAYER</option></select></label>
+        <label><span>AMOUNT</span><input id="payAmount" type="number" min="1" max="1000000000" step="1" placeholder="0" inputmode="numeric"></label>
+      </div>
+      <button id="sendPayment" class="send-payment" type="button">SEND CASH <b>→</b></button>
+      <p id="payStatus" class="pay-status" aria-live="polite"></p>
+    </div>
+  </section>
+  <section class="leaderboard-panel" id="leaderboardPanel" aria-label="Player leaderboard" aria-modal="true" role="dialog" hidden>
+    <div class="leaderboard-card">
+      <header class="leaderboard-header"><div><span class="leaderboard-kicker">ALL SAVED RIDERS</span><h2>LEADERBOARD</h2></div><button id="leaderboardClose" type="button" aria-label="Close leaderboard">×</button></header>
+      <div class="leaderboard-columns"><span>RIDER</span><span>STATUS</span><span>CASH</span></div>
+      <ol class="leaderboard-rows" id="leaderboardRows"></ol>
+      <p id="leaderboardStatus" class="leaderboard-status" aria-live="polite"></p>
+    </div>
+  </section>
+  <section class="admin-panel" id="adminPanel" aria-label="Admin panel" aria-modal="true" role="dialog" hidden>
+    <div class="admin-card">
+      <header class="admin-header"><div><span class="admin-kicker">RESTRICTED ACCESS</span><h2>ADMIN PANEL</h2></div><button id="adminClose" type="button" aria-label="Close admin panel">×</button></header>
+      <section class="admin-money" aria-label="Player cash command">
+        <div class="admin-money-fields">
+          <label><span>ACTION</span><select id="adminMoneyAction"><option value="set">SET CASH</option><option value="add">ADD CASH</option></select></label>
+          <label><span>PLAYER</span><select id="adminMoneyPlayer"><option value="">SELECT PLAYER</option></select></label>
+          <label><span>AMOUNT</span><input id="adminMoneyAmount" type="number" min="0" max="1000000000" step="1" placeholder="0" inputmode="numeric"></label>
+        </div>
+        <button id="adminMoneyApply" type="button">APPLY</button>
+        <p id="adminMoneyStatus" aria-live="polite"></p>
+      </section>
+      <div class="admin-table-wrap"><table><thead><tr><th>IP ADDRESS</th><th>BEST</th><th>UPDATED</th></tr></thead><tbody id="adminRows"></tbody></table></div>
+      <p id="adminStatus" class="admin-status" aria-live="polite"></p>
+    </div>
+  </section>
+</body>
+</html>

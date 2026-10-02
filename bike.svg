@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 530" fill="none">
+  <defs>
+    <linearGradient id="frame" x1="403" y1="190" x2="546" y2="364" gradientUnits="userSpaceOnUse"><stop stop-color="#fa6737"/><stop offset="1" stop-color="#bb3020"/></linearGradient>
+    <linearGradient id="tank" x1="544" y1="144" x2="681" y2="244" gradientUnits="userSpaceOnUse"><stop stop-color="#ff7041"/><stop offset="1" stop-color="#c63727"/></linearGradient>
+    <linearGradient id="fork" x1="712" y1="181" x2="766" y2="426" gradientUnits="userSpaceOnUse"><stop stop-color="#eee8dc"/><stop offset=".48" stop-color="#8b8b83"/><stop offset="1" stop-color="#ded7ca"/></linearGradient>
+    <linearGradient id="fender" x1="682" y1="201" x2="839" y2="276" gradientUnits="userSpaceOnUse"><stop stop-color="#f66b3c"/><stop offset="1" stop-color="#bd3628"/></linearGradient>
+    <linearGradient id="seat" x1="400" y1="138" x2="539" y2="169" gradientUnits="userSpaceOnUse"><stop stop-color="#282a29"/><stop offset="1" stop-color="#080a0a"/></linearGradient>
+    <filter id="glow" x="829" y="183" width="100" height="61" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <!-- wheels -->
+  <g stroke="#111313" stroke-width="24"><circle cx="238" cy="382" r="105"/><circle cx="782" cy="382" r="105"/></g>
+  <g stroke="#777871" stroke-width="2" opacity=".7"><circle cx="238" cy="382" r="87"/><circle cx="782" cy="382" r="87"/><path d="M238 295v174m-87-87h174m-62-61 123 123M176 321l123 123m483-149v174m-87-87h174m-62-61 123 123m-185-62 123-123m-123 123 123 123"/></g>
+  <g fill="#242726" stroke="#090b0b" stroke-width="5"><circle cx="238" cy="382" r="22"/><circle cx="782" cy="382" r="22"/></g>
+  <g fill="#b8b5ac"><circle cx="238" cy="382" r="8"/><circle cx="782" cy="382" r="8"/></g>
+  <!-- rear swingarm and drive -->
+  <path d="m248 378 166-114 133 102-38 18-118-86-120 98-23-18Z" fill="#4b4e4b" stroke="#171919" stroke-width="9"/>
+  <path d="m251 382 160-26m-172 36 176-23" stroke="#9b9a90" stroke-width="3" opacity=".8"/>
+  <circle cx="416" cy="263" r="40" fill="#232625" stroke="#111313" stroke-width="10"/><circle cx="416" cy="263" r="22" stroke="#8c8d85" stroke-width="4"/>
+  <path d="m414 264 44 69 85 30-42-102-64-29" stroke="#c0bcb1" stroke-width="8" stroke-linejoin="round"/>
+  <!-- chassis -->
+  <path d="m424 263 121-81 91 49-83 130-71-5-58-93Z" fill="url(#frame)" stroke="#211c19" stroke-width="8" stroke-linejoin="round"/>
+  <path d="m428 265 119 90m-5-173 10 173m-10-173 90 49" stroke="#ff8151" stroke-width="5" opacity=".8"/>
+  <!-- engine -->
+  <path d="m478 253 77-18 52 64-39 64-91-3-31-54 32-53Z" fill="#323634" stroke="#111313" stroke-width="9"/>
+  <path d="m491 272 70-16m-66 31 74-17m-70 33 68-17m-53 42 36-9" stroke="#777a73" stroke-width="5"/>
+  <path d="m554 360 13 32-22 9-20-41m31 20h48" stroke="#c1bcb0" stroke-width="8" stroke-linecap="round"/>
+  <!-- seat and tank -->
+  <path d="m378 177 46-43 111 2 42 24-35 22-128 12-36-17Z" fill="url(#seat)" stroke="#0d0f0f" stroke-width="7"/>
+  <path d="m516 166 45-54 122 13 62 50-19 68-126 13-56-47-28-43Z" fill="url(#tank)" stroke="#171918" stroke-width="9" stroke-linejoin="round"/>
+  <path d="m583 139 85 11 43 29-89 1-39-41Z" fill="#f98253" opacity=".7"/>
+  <path d="m612 193 102-1-8 34-112 8-26-21 44-20Z" fill="#252827"/>
+  <path d="m627 202 52 0" stroke="#f0e8da" stroke-width="4" opacity=".85"/>
+  <!-- exhaust -->
+  <path d="m553 332 98 49 83 1 22 15-10 20-114-5-98-50 19-30Z" fill="#bfc0b9" stroke="#252827" stroke-width="9" stroke-linejoin="round"/>
+  <path d="m637 382 78 3 17 11-12 10-92-5" fill="#555955"/>
+  <!-- fork and front fender -->
+  <path d="m668 183 73 8 51 216-29 6-83-207-33 201-25-4 30-220Z" fill="url(#fork)" stroke="#171919" stroke-width="7" stroke-linejoin="round"/>
+  <path d="m672 183 79 4 7 28-91-7 5-25Z" fill="#272a28" stroke="#101212" stroke-width="6"/>
+  <path d="m654 191 122 22 89 56-24 12-82-40-105-21v-29Z" fill="url(#fender)" stroke="#151717" stroke-width="7" stroke-linejoin="round"/>
+  <path d="m809 256 44 14" stroke="#ff8c59" stroke-width="5"/>
+  <!-- handlebar, light, controls -->
+  <path d="m689 168 54-42 75 13 29-9 8 12-42 18-67-8-40 37" stroke="#222524" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m826 130 54-9 21 10-14 15-58 8-15-8 12-16Z" fill="#d8d3c7"/>
+  <ellipse cx="877" cy="211" rx="19" ry="11" fill="#ffb17c" filter="url(#glow)"/>
+  <path d="m859 203 42 1 8 13-15 13-32-7-12-11 9-9Z" fill="#d6d3c9" stroke="#222523" stroke-width="6"/>
+  <!-- front plate -->
+  <path d="m736 204 65 11 32 62-19 27-67-38-21-62 10 0Z" fill="#eee9de" stroke="#242726" stroke-width="7"/>
+  <path d="m759 220 27 4 20 37-29-13-18-28Z" fill="#f25430"/>
+  <path d="m784 236 25 3" stroke="#252827" stroke-width="4"/>
+  <!-- rear side number panel -->
+  <path d="m405 185 38-26 68 2 19 18-45 34-73-8-7-20Z" fill="#ece7db" stroke="#171919" stroke-width="6"/>
+  <path d="m430 174 55 2" stroke="#ee5330" stroke-width="5"/>
+  <path d="m390 204-49 29-44 78" stroke="#272a28" stroke-width="10" stroke-linecap="round"/>
+  <path d="m325 308-38 12" stroke="#d3cec2" stroke-width="8" stroke-linecap="round"/>
+  <!-- body highlights -->
+  <path d="m427 250 50-33 23 8-45 35m75 102 39-57" stroke="#ff8b5c" stroke-width="5" opacity=".85"/>
+  <path d="m239 277 12 14m-106 91 16 0m621-104 16 14m-7 102 16 0" stroke="#d0c8ba" stroke-width="3" opacity=".65"/>
+</svg>
